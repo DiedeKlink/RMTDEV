@@ -5,12 +5,16 @@ import {
     sortingEl
 } from "../common.js";
 import renderJobList from './JobList.js';
+import renderPaginationButtons from "./Pagination.js";
+
 
 const clickHandler = event => {
 
     const clickedButtonEl = event.target.closest('.sorting__button')
 
     if (!clickedButtonEl) return;
+
+    state.currentPage = 1;
 
     const recent = clickedButtonEl.className.includes('--recent') ? true : false
 
@@ -31,6 +35,8 @@ const clickHandler = event => {
             return b.relevanceScore - a.relevanceScore; 
         })
     }
+
+    renderPaginationButtons();
 
     renderJobList();
     
